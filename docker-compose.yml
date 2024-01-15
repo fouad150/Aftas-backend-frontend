@@ -1,0 +1,33 @@
+version: '3'
+services:
+  backend:
+#    build:
+#      context: ./demo
+#      dockerfile: Dockerfile
+    image: fouadhoudda/aftasbackend
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+
+  frontend:
+#    build:
+#      context: ./AFTAS-ANGULAR
+#      dockerfile: Dockerfile
+    image: fouadhoudda/aftasfront
+
+    ports:
+      - 4200:4200
+    depends_on:
+      - backend
+
+  database:
+    image: mysql:latest
+    container_name: database
+    environment:
+      - MYSQL_ROOT_PASSWORD=fouad
+      - MYSQL_DATABASE=aftas
+      - MYSQL_USER=fouad
+      - MYSQL_PASSWORD=fouad
+    ports:
+      - 3306:3306
